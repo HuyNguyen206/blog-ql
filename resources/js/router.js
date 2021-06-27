@@ -1,13 +1,19 @@
 import home from "./home";
 import VueRouter from 'vue-router'
-import post from "./post";
+import ListPost from "./ListPost";
+import PostItemDetail from "./components/PostItemDetail";
+import ListPostByTopic from "./components/ListPostByTopic";
+import ListPostByUser from "./components/ListPostByUser";
 const routes = [
-    {path: '/', component:home, name: 'home'},
-    {path: '/post/:id', component:post, name: 'posts.show'}
+    {path: '/', component:ListPost, name: 'posts.index'},
+    {path: '/posts/:id', component:PostItemDetail, name: 'posts.show'},
+    {path: '/topics/:slug/posts', component:ListPostByTopic, name: 'topics.posts'},
+    {path: '/user/:id/posts', component:ListPostByUser, name: 'user.posts'}
 ];
 
 const router = new VueRouter({
-    routes
+    routes,
+    mode: 'history'
 })
 
 export default router

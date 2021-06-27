@@ -16,6 +16,8 @@ type User {
     id: ID!
     name: String!
     email: String!
+    latestAvatar: String! @method(name: "getLatestAvatar")
+    posts: [Post!] @hasMany
     created_at: DateTime!
     updated_at: DateTime!
 }
@@ -38,3 +40,5 @@ type Post{
     user: User! @belongsTo
     topic: Topic! @belongsTo
 }
+
+

@@ -6,10 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use Notifiable;
+    use Notifiable, HasMediaTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -46,5 +49,13 @@ class User extends Authenticatable
     public function topics(): HasMany
     {
         return $this->hasMany(Topic::class);
+    }
+
+//    public function latestAvatar(): HasMany{
+//        return $this->hasMany(Media::class, 'model_id')->where('model_type', User::class)->latest()->first();
+//    }
+
+    public function getLatestAvatar(){
+        return $this->getMedia()->sortByDesc('created_at')->first()->getFullUrl();
     }
 }
