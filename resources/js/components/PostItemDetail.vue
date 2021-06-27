@@ -3,7 +3,7 @@
         <div v-if="$apollo.loading">Loading...</div>
         <div v-else>
             <div class="text-lg text-gray-600">By <router-link class="underline hover:text-gray-900" :to="{name:'user.posts', params:{id: post.user.id}}">{{post.user.name}}</router-link>
-                in <router-link class="underline hover:text-gray-900" :to="{name: 'topics.posts', params:{slug:post.topic.slug}}">{{post.topic.name}}</router-link> on {{ post.created_at }}</div>
+                in <router-link class="underline hover:text-gray-900" :to="{name: 'topics.posts', params:{slug:post.topic.slug}}">{{post.topic.name}}</router-link> on {{ post.created_at | timeago}}</div>
             <h1 class="text-5xl mt-10 font-bold mb-12">{{post.title}}</h1>
             <p class="text-gray-700 pb-3 mb-12 whitespace-pre-line" v-html="post.content">
             </p>
@@ -16,7 +16,7 @@
                         Written by  <router-link class="underline hover:text-gray-900" :to="{name:'user.posts', params:{id: post.user.id}}">{{post.user.name}}</router-link>
                     </div>
                     <div class="text-gray-600">
-                        Published in <router-link class="underline hover:text-gray-900" :to="{name: 'topics.posts', params:{slug:post.topic.slug}}">{{post.topic.name}}</router-link> on {{ post.created_at }}
+                        Published in <router-link class="underline hover:text-gray-900" :to="{name: 'topics.posts', params:{slug:post.topic.slug}}">{{post.topic.name}}</router-link> on {{ post.created_at | longDate}}
                     </div>
                 </div>
             </div>
@@ -53,6 +53,9 @@ export default {
                 return {
                     id: this.$route.params.id
                 }
+            },
+            error(){
+                this.$router.push({name: '404'})
             }
         }
     }

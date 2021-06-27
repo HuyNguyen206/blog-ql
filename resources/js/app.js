@@ -22,6 +22,9 @@ const apolloProvider = new VueApollo({
 })
 
 Vue.use(VueRouter)
+import moment from "moment"
+Vue.filter('timeago',  value => moment(value).fromNow())
+Vue.filter('longDate', value => moment(value).format('MMMM Do YYYY'))
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

@@ -7,7 +7,7 @@
             <p class="text-gray-700">{{post.lead}}</p>
             <span class="text-gray-500 mt-1">
                 By <router-link class="underline hover:text-gray-900" :to="{name:'user.posts', params:{id: post.user.id}}">{{post.user.name}}</router-link> in
-                <router-link class="underline hover:text-gray-900" :to="{name: 'topics.posts', params:{slug:post.topic.slug}}">{{post.topic.name}}</router-link> on {{ post.created_at }}</span>
+                <router-link class="underline hover:text-gray-900" :to="{name: 'topics.posts', params:{slug:post.topic.slug}}">{{post.topic.name}}</router-link> on {{ post.created_at | timeago}}</span>
         </div>
     </div>
 </template>
